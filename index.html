@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DuZa · Salud para tu mascota</title>
+<meta name="description" content="DuZa es la app que organiza la salud de tu perro o gato: carnet de vacunas digital, recordatorios de desparasitación y medicamentos, historial veterinario y peso. Gratis y en español.">
+<meta name="theme-color" content="#17A39B">
+<link rel="icon" href="assets/icono.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DuZa · Salud para tu mascota">
+<meta property="og:description" content="Vacunas, recordatorios e historial veterinario de tus mascotas, en una sola app.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "DuZa",
+  "operatingSystem": "Android, iOS",
+  "applicationCategory": "HealthApplication",
+  "description": "App para organizar la salud de tus mascotas: vacunas, recordatorios, historial veterinario y peso.",
+  "inLanguage": "es",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+:root{
+  --teal:#17A39B; --teal-d:#0F7F79; --teal-l:#E3F5F3;
+  --coral:#FF7A6B; --coral-l:#FFE9E6;
+  --navy:#1F3A5F; --ink:#24324A; --muted:#5B6B7F;
+  --bg:#FFFFFF; --bg2:#F6FBFA; --card:#FFFFFF; --line:#E3ECEB;
+  --shadow:0 10px 30px rgba(31,58,95,.10);
+  --r:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A24; --bg2:#13222E; --card:#182A38; --line:#24394A;
+    --ink:#E6EEF5; --muted:#A3B3C2; --navy:#E6EEF5; --teal-l:#173A3C; --coral-l:#3A2420;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A24; --bg2:#13222E; --card:#182A38; --line:#24394A;
+  --ink:#E6EEF5; --muted:#A3B3C2; --navy:#E6EEF5; --teal-l:#173A3C; --coral-l:#3A2420;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Inter,sans-serif;color:var(--navy);line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:900;letter-spacing:-1.5px}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:900}
+h3{font-size:1.2rem;font-weight:800}
+p{margin:0 0 1em}
+a{color:var(--teal-d)}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.eyebrow{display:inline-block;font:800 .8rem Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:40rem}
+section{padding:84px 0}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:900 1.6rem Inter,sans-serif}
+.brand img{width:40px;height:40px}
+.brand .du{color:var(--navy)}.brand .za{color:var(--teal)}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.nav ul a{color:var(--ink);text-decoration:none;font-weight:500}
+.nav ul a:hover{color:var(--teal)}
+@media (max-width:820px){.nav ul{display:none}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font:800 1rem Inter,sans-serif;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--coral);color:#fff;box-shadow:0 8px 20px rgba(255,122,107,.35)}
+.btn-ghost{background:transparent;color:var(--teal-d);border:2px solid var(--teal)}
+.btn-sm{padding:9px 18px;font-size:.95rem}
+
+/* store badges */
+.stores{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 14px}
+.store{display:flex;align-items:center;gap:10px;background:#111;color:#fff;text-decoration:none;padding:9px 18px;border-radius:12px;min-width:170px;transition:transform .15s}
+.store:hover{transform:translateY(-2px)}
+.store svg{width:26px;height:26px;fill:#fff;flex:none}
+.store small{display:block;font-size:.68rem;opacity:.8;line-height:1}
+.store b{display:block;font:700 1.08rem Inter,sans-serif;line-height:1.2}
+.note{font-size:.9rem;color:var(--muted)}
+
+/* hero */
+.hero{padding:56px 0 72px;background:radial-gradient(1100px 500px at 85% 10%,var(--teal-l),transparent 60%),radial-gradient(700px 400px at 0% 100%,var(--coral-l),transparent 60%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1 .hl{color:var(--teal)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* phone mockup */
+.phone-wrap{position:relative;display:flex;justify-content:center}
+.phone{width:290px;background:var(--card);border:10px solid #1B2533;border-radius:44px;box-shadow:var(--shadow);padding:18px 16px 22px;position:relative;z-index:2}
+.phone:before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:90px;height:20px;background:#1B2533;border-radius:12px}
+.app-top{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px}
+.app-top b{font:900 1.2rem Inter,sans-serif;color:var(--navy)}
+.pets{display:flex;gap:10px;margin-bottom:14px}
+.pet{flex:1;background:var(--teal-l);border-radius:16px;padding:10px;text-align:center;font:800 .9rem Inter,sans-serif;color:var(--navy)}
+.pet .av{width:46px;height:46px;border-radius:50%;margin:0 auto 4px;overflow:hidden;background:#fff}
+.pet .av img{width:100%;height:100%}
+.pet small{display:block;font:500 .72rem Inter,sans-serif;color:var(--muted)}
+.rem-title{font:800 .85rem Inter,sans-serif;color:var(--muted);margin:4px 0 8px}
+.rem{display:flex;gap:10px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:8px;font-size:.84rem}
+.rem i{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-style:normal;flex:none}
+.rem b{display:block;color:var(--ink);font-weight:600}
+.rem span{color:var(--muted);font-size:.76rem}
+.rem .tag{margin-left:auto;font:800 .7rem Inter,sans-serif;padding:3px 8px;border-radius:999px;background:var(--coral-l);color:#D9503F}
+.rem .tag.ok{background:var(--teal-l);color:var(--teal-d)}
+.blob{position:absolute;border-radius:50%;z-index:1}
+.blob.a{width:120px;height:120px;background:var(--coral);opacity:.18;top:-10px;right:8%}
+.blob.b{width:80px;height:80px;background:var(--teal);opacity:.2;bottom:10px;left:10%}
+.float-card{position:absolute;z-index:3;background:var(--card);box-shadow:var(--shadow);border-radius:16px;padding:10px 14px;font-size:.85rem;display:flex;gap:8px;align-items:center}
+.float-card.one{left:0;top:30%}
+.float-card.two{right:0;bottom:16%}
+@media (max-width:520px){.float-card{display:none}}
+
+/* trust strip */
+.strip{background:var(--navy);color:#fff;padding:22px 0}
+:root[data-theme="dark"] .strip{background:#0B141C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .strip{background:#0B141C}}
+.strip ul{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;list-style:none;margin:0;padding:0;font-weight:600}
+.strip li:before{content:"✓";color:var(--coral);margin-right:8px;font-weight:900}
+
+/* problem */
+.problem{background:var(--bg2)}
+.pain{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.pain div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.pain .emo{font-size:2rem}
+@media (max-width:800px){.pain{grid-template-columns:1fr}}
+
+/* features */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:transform .2s,box-shadow .2s}
+.feat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;margin-bottom:16px;background:var(--teal-l)}
+.feat:nth-child(even) .ico{background:var(--coral-l)}
+.feat p{color:var(--muted);margin:0}
+
+/* steps */
+.steps{background:linear-gradient(180deg,var(--bg),var(--teal-l))}
+.step-list{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:44px;counter-reset:s}
+.step{text-align:center;padding:0 10px}
+.step:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:58px;height:58px;margin:0 auto 16px;border-radius:50%;background:var(--teal);color:#fff;font:900 1.5rem Inter,sans-serif;box-shadow:0 8px 18px rgba(23,163,155,.35)}
+.step p{color:var(--muted)}
+@media (max-width:760px){.step-list{grid-template-columns:1fr}}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center}
+.story-art{background:var(--teal-l);border-radius:32px;padding:20px}
+@media (max-width:820px){.story-grid{grid-template-columns:1fr}.story-art{max-width:360px;margin:0 auto}}
+.quote{border-left:4px solid var(--coral);padding-left:18px;font:700 1.15rem Inter,sans-serif;color:var(--navy)}
+
+/* audience */
+.aud{background:var(--bg2)}
+.aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.aud-grid div{background:var(--card);border-radius:var(--r);padding:22px;border:1px solid var(--line)}
+.aud-grid b{display:block;font:800 1.05rem Inter,sans-serif;color:var(--navy);margin:8px 0 4px}
+.aud-grid p{color:var(--muted);font-size:.95rem;margin:0}
+@media (max-width:900px){.aud-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.aud-grid{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:780px;margin:40px auto 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:12px}
+summary{cursor:pointer;font:800 1.05rem Inter,sans-serif;color:var(--navy);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--teal);font-size:1.4rem;line-height:1}
+details[open] summary:after{content:"–"}
+details p{margin:12px 0 0;color:var(--muted)}
+
+/* cta */
+.cta{background:var(--teal);color:#fff;border-radius:32px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+.cta h2{color:#fff}
+.cta p{color:#E8FBF9;max-width:34rem;margin:0 auto}
+.cta .stores{justify-content:center}
+.cta .store{background:#fff;color:#111}.cta .store svg{fill:#111}
+.cta:before,.cta:after{content:"";position:absolute;border-radius:50%;background:#fff;opacity:.08}
+.cta:before{width:260px;height:260px;left:-80px;top:-80px}
+.cta:after{width:180px;height:180px;right:-40px;bottom:-60px}
+
+footer{padding:44px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.93rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:20px}
+.foot a{color:var(--muted);text-decoration:none}.foot a:hover{color:var(--teal)}
+.foot-logo img{height:48px;width:auto}
+.lg-dark{display:none!important}
+:root[data-theme="dark"] .lg-light{display:none!important}:root[data-theme="dark"] .lg-dark{display:block!important}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lg-light{display:none!important}:root:not([data-theme="light"]) .lg-dark{display:block!important}}
+.theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio" aria-label="DuZa, inicio"><img src="assets/icono.svg" alt=""><span><span class="du">Du</span><span class="za">Za</span></span></a>
+    <ul>
+      <li><a href="#funciones">Funciones</a></li>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#historia">Nuestra historia</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" href="#descargar">Descargar gratis</a>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">App de salud para mascotas</span>
+      <h1>La salud de tu mascota, <span class="hl">siempre a tiempo</span>.</h1>
+      <p class="lead">DuZa guarda el carnet de vacunas, te avisa de desparasitaciones y medicamentos, y tiene todo el historial listo para tu próxima visita al veterinario. Simple, en español y gratis.</p>
+      <div class="stores">
+        <a class="store" data-store="android" href="#descargar" aria-label="Disponible en Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 1.8 13.5 12l-9.9 10.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Zm11 11.3 2.6 2.6-11.9 6.8 9.3-9.4Zm3.9-3.9 3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.9-2.8 2.9-2.8ZM5.3 1.5l11.9 6.8-2.6 2.6-9.3-9.4Z"/></svg>
+          <span><small>DISPONIBLE EN</small><b>Google Play</b></span>
+        </a>
+        <a class="store" data-store="ios" href="#descargar" aria-label="Descárgala en el App Store">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.8 1.3 10.3.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.2ZM13.9 4.9c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3-1.5Z"/></svg>
+          <span><small>Descárgala en el</small><b>App Store</b></span>
+        </a>
+      </div>
+      <p class="note">Gratis · Sin tarjeta de crédito · Para perros y gatos</p>
+    </div>
+
+    <div class="phone-wrap" aria-hidden="true">
+      <span class="blob a"></span><span class="blob b"></span>
+      <div class="float-card one">💉 <span><b>Vacuna al día</b><br><small>Dudu · Rabia</small></span></div>
+      <div class="float-card two">⚖️ <span><b>12,4 kg</b><br><small>Zasa · peso estable</small></span></div>
+      <div class="phone">
+        <div class="app-top"><b>Hola, Omar 👋</b><span>🔔</span></div>
+        <div class="pets">
+          <div class="pet dudu"><div class="av"><img src="assets/dudu.svg" alt=""></div>Dudu<small>4 años</small></div>
+          <div class="pet zasa"><div class="av"><img src="assets/zasa.svg" alt=""></div>Zasa<small>3 años</small></div>
+        </div>
+        <div class="rem-title">Próximos cuidados</div>
+        <div class="rem"><i style="background:var(--coral-l)">💊</i><div><b>Desparasitación</b><span>Zasa · mañana</span></div><em class="tag">Pronto</em></div>
+        <div class="rem"><i style="background:var(--teal-l)">💉</i><div><b>Refuerzo séxtuple</b><span>Dudu · 14 nov</span></div><em class="tag ok">Agendado</em></div>
+        <div class="rem"><i style="background:var(--teal-l)">🩺</i><div><b>Control veterinario</b><span>Ambos · 2 dic</span></div><em class="tag ok">Agendado</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <ul class="wrap">
+    <li>100% en español</li>
+    <li>Varias mascotas en una cuenta</li>
+    <li>Recordatorios automáticos</li>
+    <li>Tus datos son tuyos</li>
+  </ul>
+</div>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="wrap center">
+    <span class="eyebrow">¿Te suena?</span>
+    <h2>Cuidar a quien quieres no debería depender de tu memoria</h2>
+    <p class="lead">El carnet de papel se pierde, las fechas se olvidan y en el veterinario siempre falta un dato.</p>
+    <div class="pain">
+      <div class="reveal"><div class="emo">📄</div><h3>“¿Dónde dejé el carnet?”</h3><p>Las vacunas quedan anotadas en un papel que nunca está cuando lo necesitas.</p></div>
+      <div class="reveal"><div class="emo">📅</div><h3>“¿Cuándo tocaba la pastilla?”</h3><p>Desparasitaciones y tratamientos que se pasan de fecha sin darte cuenta.</p></div>
+      <div class="reveal"><div class="emo">🩺</div><h3>“¿Qué le recetaron la última vez?”</h3><p>Llegas a consulta sin el historial y el veterinario tiene que adivinar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONES -->
+<!-- NOTA: revisar que estas funciones coincidan con las de la app real -->
+<section id="funciones">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Funciones</span>
+      <h2>Todo lo que tu mascota necesita, en un solo lugar</h2>
+      <p class="lead">Pensado para que lo uses en segundos, no en horas.</p>
+    </div>
+    <div class="grid">
+      <article class="feat reveal"><div class="ico">💉</div><h3>Carnet de vacunas digital</h3><p>Registra cada vacuna con su fecha y lote. Siempre en tu bolsillo, aunque cambies de veterinario.</p></article>
+      <article class="feat reveal"><div class="ico">🔔</div><h3>Recordatorios que no fallan</h3><p>DuZa te avisa antes de cada vacuna, desparasitación, baño o dosis de medicamento.</p></article>
+      <article class="feat reveal"><div class="ico">🩺</div><h3>Historial veterinario</h3><p>Consultas, diagnósticos, recetas y fotos de exámenes, ordenados por fecha.</p></article>
+      <article class="feat reveal"><div class="ico">⚖️</div><h3>Peso y crecimiento</h3><p>Sigue la evolución del peso con un gráfico sencillo y detecta cambios a tiempo.</p></article>
+      <article class="feat reveal"><div class="ico">🐶</div><h3>Todas tus mascotas</h3><p>Perros, gatos y más: cada uno con su perfil, su foto y sus propios cuidados.</p></article>
+      <article class="feat reveal"><div class="ico">👨‍👩‍👧</div><h3>Comparte con tu familia</h3><p>Que todos en casa sepan qué toca y quién ya le dio la pastilla. Sin dosis repetidas.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona" class="steps">
+  <div class="wrap center">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>Empieza en menos de 2 minutos</h2>
+    <div class="step-list">
+      <div class="step reveal"><h3>Descarga DuZa</h3><p>Gratis en Google Play y App Store.</p></div>
+      <div class="step reveal"><h3>Crea el perfil de tu mascota</h3><p>Nombre, foto, especie y fecha de nacimiento. Agrega sus vacunas desde el carnet.</p></div>
+      <div class="step reveal"><h3>Relájate</h3><p>DuZa te avisa de cada cuidado a tiempo y guarda todo para tu próxima visita.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <div class="wrap story-grid">
+    <div class="story-art reveal"><img src="assets/mascotas.svg" alt="Ilustración de Dudu, perrito color crema, y Zasa, perrita negra y fuego"></div>
+    <div class="reveal">
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>DuZa nació de Dudu y Zasa</h2>
+      <p>Dudu es un perrito color crema que no se pierde ni una siesta. Zasa es negra y fuego, curiosa y siempre lista para jugar. Cuidar a dos mascotas a la vez significaba vacunas en fechas distintas, desparasitaciones que se cruzaban y un cajón lleno de papeles del veterinario.</p>
+      <p>Así que creamos la app que nos hacía falta, y le pusimos sus nombres: <b>Du</b>du + <b>Za</b>sa.</p>
+      <p class="quote">Hecha por dueños de mascotas, para dueños de mascotas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="aud">
+  <div class="wrap center">
+    <span class="eyebrow">Para quién es</span>
+    <h2>Para cualquier familia con mascotas</h2>
+    <div class="aud-grid">
+      <div class="reveal"><span style="font-size:1.8rem">🐾</span><b>Primerizos</b><p>Tu primer cachorro o gatito y un calendario de vacunas por delante.</p></div>
+      <div class="reveal"><span style="font-size:1.8rem">🏠</span><b>Casas con varias mascotas</b><p>Cada una con sus fechas, sin confundir quién recibió qué.</p></div>
+      <div class="reveal"><span style="font-size:1.8rem">💛</span><b>Mascotas mayores</b><p>Tratamientos crónicos, peso y controles frecuentes bajo control.</p></div>
+      <div class="reveal"><span style="font-size:1.8rem">🧳</span><b>Viajeros y rescatistas</b><p>El carnet al día cuando lo pide un hotel, una guardería o un adoptante.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="preguntas">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>¿Tienes dudas?</h2>
+    </div>
+    <div class="faq">
+      <details><summary>¿DuZa es gratis?</summary><p>Sí. Puedes descargar DuZa y usar sus funciones principales sin pagar y sin registrar una tarjeta.</p></details>
+      <details><summary>¿Sirve para gatos y otras mascotas?</summary><p>Sí. Puedes crear perfiles para perros, gatos y otras mascotas, cada uno con sus propios cuidados y recordatorios.</p></details>
+      <details><summary>¿Puedo registrar a varias mascotas?</summary><p>Claro. Todas tus mascotas viven en la misma cuenta y ves sus próximos cuidados en una sola pantalla.</p></details>
+      <details><summary>¿DuZa reemplaza al veterinario?</summary><p>No. DuZa te ayuda a organizar la información y a no olvidar fechas, pero las decisiones de salud siempre las debe tomar un médico veterinario.</p></details>
+      <details><summary>¿Mis datos están seguros?</summary><p>Tus datos son tuyos. No los vendemos a terceros y puedes eliminarlos cuando quieras. Lee nuestra <a href="privacidad.html">política de privacidad</a>.</p></details>
+      <details><summary>¿En qué teléfonos funciona?</summary><p>DuZa está disponible para Android en Google Play y para iPhone en el App Store.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="descargar">
+  <div class="wrap">
+    <div class="cta">
+      <h2>Dale a tu mascota el cuidado que se merece</h2>
+      <p>Descarga DuZa gratis y deja que las fechas importantes se acuerden solas.</p>
+      <div class="stores">
+        <a class="store" data-store="android" href="#descargar" aria-label="Disponible en Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 1.8 13.5 12l-9.9 10.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Zm11 11.3 2.6 2.6-11.9 6.8 9.3-9.4Zm3.9-3.9 3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.9-2.8 2.9-2.8ZM5.3 1.5l11.9 6.8-2.6 2.6-9.3-9.4Z"/></svg>
+          <span><small>DISPONIBLE EN</small><b>Google Play</b></span>
+        </a>
+        <a class="store" data-store="ios" href="#descargar" aria-label="Descárgala en el App Store">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.8 1.3 10.3.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.2ZM13.9 4.9c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3-1.5Z"/></svg>
+          <span><small>Descárgala en el</small><b>App Store</b></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#inicio" class="foot-logo"><img class="lg-light" src="assets/logo-claro.svg" alt="DuZa, salud para tu mascota"><img class="lg-dark" src="assets/logo-oscuro.svg" alt="DuZa, salud para tu mascota"></a>
+    <nav>
+      <a href="#funciones">Funciones</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a id="contact-link" href="#">Contacto</a>
+      <button class="theme-btn" id="theme" type="button">🌓 Tema</button>
+    </nav>
+  </div>
+  <div class="wrap" style="margin-top:18px">© <span id="y">2026</span> DuZa · Salud para tu mascota. Hecho con 🐾 por Dudu y Zasa.</div>
+</footer>
+
+<script>
+/* ====== CONFIGURA AQUÍ ====== */
+const DUZA = {
+  android: "",   // enlace de Google Play, ej. https://play.google.com/store/apps/details?id=...
+  ios: "",       // enlace de App Store,  ej. https://apps.apple.com/app/id...
+  email: "omarcardenasvenegas@gmail.com"  // correo de contacto
+};
+/* ============================ */
+document.querySelectorAll('[data-store]').forEach(a=>{
+  const url = DUZA[a.dataset.store];
+  if(url){ a.href = url; a.target = "_blank"; a.rel = "noopener"; }
+});
+const c = document.getElementById('contact-link');
+if(DUZA.email){ c.href = 'mailto:' + DUZA.email; } else { c.remove(); }
+document.getElementById('y').textContent = new Date().getFullYear();
+
+const root = document.documentElement;
+try{ const t = localStorage.getItem('duza-theme'); if(t) root.dataset.theme = t; }catch(e){}
+document.getElementById('theme').addEventListener('click',()=>{
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try{ localStorage.setItem('duza-theme', root.dataset.theme); }catch(e){}
+});
+
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12}) : null;
+document.querySelectorAll('.reveal').forEach(el=> io ? io.observe(el) : el.classList.add('in'));
+</script>
+</body>
+</html>
